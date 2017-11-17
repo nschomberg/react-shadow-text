@@ -2,6 +2,10 @@
 
 A customizable react component that renders text with a shadow.
 
+<p align="center">
+  <img width="1000" src="https://raw.githubusercontent.com/nschomberg/react-shadow-text/master/screenshot.png">
+</p>
+
 ## Installation
 
 Install `react-shadow-text` from npm:
@@ -40,7 +44,7 @@ This component takes the following optional props:
 
 ## Customizing the Component
 
-There are a couple ways to style this component.
+There are a couple ways to customize this component.
 
 ### Via theming
 
