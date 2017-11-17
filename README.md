@@ -1,9 +1,11 @@
 # react-shadow-text 🌚🌞
 
-A customizable react component that renders text with a shadow.
+A customizable react component that renders text with a shadow. [View Demo.](https://nschomberg.github.io/react-shadow-text/)
 
 <p align="center">
-  <img width="1000" src="https://raw.githubusercontent.com/nschomberg/react-shadow-text/master/screenshot.png">
+  <a href="https://nschomberg.github.io/react-shadow-text/">
+    <img width="100%" src="https://raw.githubusercontent.com/nschomberg/react-shadow-text/master/screenshot.png">
+  </a>
 </p>
 
 ## Installation
@@ -22,7 +24,6 @@ npm i --save react-shadow-text
 import ShadowText from 'react-shadow-text';
 
 class Component extends React.Component {
-
   render() {
     return (
       <ShadowText>
@@ -35,7 +36,7 @@ class Component extends React.Component {
 
 ##  Props
 
-This component takes the following optional props:
+`react-shadow-text` takes the following optional props:
 
   * __blurShadow__: Boolean - Whether to blur the text shadow or not. Defaults to `true`.
   * __className__: String - An optional additional classname to give the component.
@@ -44,7 +45,7 @@ This component takes the following optional props:
 
 ## Customizing the Component
 
-There are a couple ways to customize this component.
+There are a few ways to customize the `react-shadow-text` component.
 
 ### Via theming
 
@@ -77,7 +78,9 @@ The theme may also be passed in by a `<ThemeProvider />`:
 
 ### Via CSS Custom Properties
 
-```sass
+The component may be styled using [CSS Custom Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables).
+
+```css
 // styles.css
 
 .HoverText--custom {
@@ -90,6 +93,13 @@ The theme may also be passed in by a `<ThemeProvider />`:
   --shadow-text-transition-duration: 0.2s;
   --shadow-text-transition-timing: ease-out;
 }
+
+.HoverText--custom:hover {
+  --shadow-text-shadow-blur: 0px;
+  --shadow-text-x-translate: 0px;
+  --shadow-text-y-translate: 0px;
+}
+
 ```
 ```js
 // component.js
@@ -101,7 +111,9 @@ The theme may also be passed in by a `<ThemeProvider />`:
 
 ### Via stylesheets
 
-```sass
+The component may be styled using by using its CSS classes.
+
+```css
 // styles.css
 .HoverText {
   font-size: 100px;

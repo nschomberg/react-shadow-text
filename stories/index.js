@@ -17,7 +17,7 @@ stories
   .addDecorator(host({
     title: 'Shadow Text',
     align: 'center middle',
-    backdrop: 'papayaWhip',
+    backdrop: 'white',
   }));
 
 // https://fonts.google.com/?selection.family=Bungee+Hairline|Codystar|Kumar+One+Outline|Raleway+Dots
@@ -27,6 +27,7 @@ const fonts = [
   'Codystar',
   'Roboto',
   'Kumar One Outline',
+  'Archivo Black',
 ];
 
 // Import some fonts
@@ -48,23 +49,23 @@ const knobs = { boolean, text, color, number, select };
 
 // Customizer component for adding custom styling
 const Customizer = styled.div`
-  font-family: ${props => props.select('Font', fonts, fonts[0])}, cursive;
-  font-size: ${props => props.number('Font size (vw)', 10)}vw;
+  font-family: ${props => props.select('Font', fonts, props.font || fonts[0])}, cursive;
+  font-size: ${props => props.number('Font size (vw)', props.fontSize || 10)}vw;
 `;
 
 stories.add('Simple', () => {
   return (
-    <Customizer {...knobs}>
+    <Customizer {...knobs} fontSize={8}>
       <ShadowText
         blurShadow={true}
         theme={{
           shadowTextXTranslate: '0.5vw',
           shadowTextYTranslate: '-0.5vw',
-          shadowTextColor: colors.green,
+          shadowTextColor: colors.black,
           shadowTextShadowColor: colors.gray,
         }}
       >
-        {text('Text', 'Shadow Text 🌚')}
+        {text('Text', '🌚 Shadow Text 🌞')}
       </ShadowText>
     </Customizer>
   );
@@ -82,9 +83,9 @@ stories.add('Hover Animation', () => {
 
     get theme() {
       return {
-        shadowTextXTranslate: this.state.isHovering ? '0.5vw' : '0vw',
-        shadowTextYTranslate: this.state.isHovering ? '-0.5vw' : '0vw',
-        shadowTextShadowBlur: this.state.isHovering ? '0.5vw' : '0vw',
+        shadowTextXTranslate: this.state.isHovering ? '-0.1vw' : '-0.6vw',
+        shadowTextYTranslate: this.state.isHovering ? '0.1vw' : '0.4vw',
+        shadowTextShadowBlur: this.state.isHovering ? '0.1vw' : '0.5vw',
         shadowTextColor: colors.green,
         shadowTextShadowColor: colors.gray,
       };
@@ -95,16 +96,58 @@ stories.add('Hover Animation', () => {
         <ShadowText
           onMouseEnter={() => this.setState({ isHovering: true })}
           onMouseLeave={() => this.setState({ isHovering: false })}
+          onClick={() => this.setState({ isClicking: true })}
           theme={this.theme}
         >
-          {text('Text', 'Hover Over')}
+          {text('Text', 'Hover 🚁')}
         </ShadowText>
       );
     }
   }
 
   return (
-    <Customizer {...knobs}>
+    <Customizer {...knobs} font="Raleway Dots">
+      <HoverComponent />
+    </Customizer>
+  );
+});
+
+stories.add('Hover Animation 2', () => {
+
+  class HoverComponent extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        isHovering: false,
+      };
+    }
+
+    get theme() {
+      return {
+        shadowTextXTranslate: this.state.isHovering ? '-1vw' : '0vw',
+        shadowTextYTranslate: this.state.isHovering ? '-1vw' : '0vw',
+        shadowTextColor: colors.purple,
+        shadowTextShadowColor: colors.gray,
+      };
+    }
+
+    render() {
+      return (
+        <ShadowText
+          onMouseEnter={() => this.setState({ isHovering: true })}
+          onMouseLeave={() => this.setState({ isHovering: false })}
+          onClick={() => this.setState({ isClicking: true })}
+          theme={this.theme}
+          blurShadow={false}
+        >
+          {text('Text', 'More Hover')}
+        </ShadowText>
+      );
+    }
+  }
+
+  return (
+    <Customizer {...knobs} font="Archivo Black">
       <HoverComponent />
     </Customizer>
   );
@@ -112,9 +155,9 @@ stories.add('Hover Animation', () => {
 
 stories.add('Customizable', () => {
   return (
-    <Customizer {...knobs}>
+    <Customizer {...knobs} fontSize={7}>
       <ShadowText
-        blurShadow={true}
+        blurShadow={boolean('Blur shadow', true)}
         theme={{
           shadowTextXTranslate: `${number('X Translation (vw)', 0.5)}vw`,
           shadowTextYTranslate: `${number('Y Translation (vw)', -0.5)}vw`,
