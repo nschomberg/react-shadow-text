@@ -15,15 +15,13 @@ const defaultVariables = {
   shadowTextTransitionTiming: 'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
 };
 
-
-
 /** Helpers **/
 
 // Helper to find value in theme prop or fallback onto default if missing.
 const themeGetter = (props, key) => {
   // Look for var in theme
   const value = props.theme && props.theme[key];
-  debugger
+
   // Fallback on default
   if (typeof value == 'undefined') {
     if (!defaultVariables.hasOwnProperty(key)) {
@@ -43,24 +41,39 @@ const cssVarFromProps = camelCaseVariableName => props => `var(${camelCaseToCssC
 
 /** Styling **/
 
+// Styling mixin for an anchored element
+const anchoredElement = props => `
+  position: relative;
+`;
+
+// Styling mixin for a floating element
+const floatingElement = props => `
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: ${cssVar(props, 'shadowTextTransitionDuration')} transform ${cssVar(props, 'shadowTextTransitionTiming')},
+              ${cssVar(props, 'shadowTextTransitionDuration')} text-shadow ${cssVar(props, 'shadowTextTransitionTiming')};
+  transform: translate(${cssVar(props, 'shadowTextXTranslate')}, ${cssVar(props, 'shadowTextYTranslate')});
+`;
+
+// Styled component
 export const StyledShadowText = styled.div`
   position: relative;
   box-sizing: border-box;
 `;
 
+// Styled text subcomponent
 export const StyledText = styled.div`
-  position: absolute;
+  ${props => props.anchorShadow ? floatingElement(props) : anchoredElement(props)}
   z-index: calc(${cssVarFromProps('shadowTextZIndex')} + 1);
   color: ${cssVarFromProps('shadowTextColor')};
-  transition: ${cssVarFromProps('shadowTextTransitionDuration')} transform ${cssVarFromProps('shadowTextTransitionTiming')};
-  transform: translate(${cssVarFromProps('shadowTextXTranslate')}, ${cssVarFromProps('shadowTextYTranslate')});
 `;
 
+// Styled shadow  subcomponent
 export const StyledShadow = styled.div`
-  position: relative;
+  ${props => props.anchorShadow ? anchoredElement(props) : floatingElement(props)}
   z-index: ${cssVarFromProps('shadowTextZIndex')};
   color: ${props => props.blurShadow ? 'transparent' : cssVar(props, 'shadowTextShadowColor')};
   text-shadow: ${props => props.blurShadow ? `0 0 ${cssVar(props, 'shadowTextShadowBlur')} ${cssVar(props, 'shadowTextShadowColor')}` : 'none'};
-  transition: ${cssVarFromProps('shadowTextTransitionDuration')} text-shadow ${cssVarFromProps('shadowTextTransitionTiming')};
   user-select: none;
 `

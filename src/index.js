@@ -7,6 +7,8 @@ export { StyledShadowText, StyledText, StyledShadow };
 
 class ShadowText extends Component {
   static propTypes = {
+    /** Whether to anchor the text shadow to the page or not **/
+    anchorShadow: PropTypes.bool,
     /** Whether to blur the text shadow or not **/
     blurShadow: PropTypes.bool,
     /** An optional additional classname to give the component **/
@@ -33,6 +35,7 @@ class ShadowText extends Component {
   }
 
   static defaultProps = {
+    anchorShadow: false,
     blurShadow: true,
     className: null,
     children: null,
@@ -41,6 +44,7 @@ class ShadowText extends Component {
 
   render() {
     const {
+      anchorShadow,
       blurShadow,
       className,
       children,
@@ -52,6 +56,7 @@ class ShadowText extends Component {
       'ShadowText',
       {
         ShadowText: {
+          '--anchoredShadow': anchorShadow,
           '--blurredShadow': blurShadow,
         },
       },
@@ -59,11 +64,11 @@ class ShadowText extends Component {
     ]);
 
     return (
-      <StyledShadowText className={classNames} blurShadow={blurShadow} {...otherProps} theme={theme}>
-        <StyledText className="ShadowText__Text" theme={theme}>
+      <StyledShadowText className={classNames} anchorShadow={anchorShadow} blurShadow={blurShadow} {...otherProps} theme={theme}>
+        <StyledText className="ShadowText__Text" anchorShadow={anchorShadow} theme={theme}>
           {children}
         </StyledText>
-        <StyledShadow className="ShadowText__Shadow" blurShadow={blurShadow} theme={theme}>
+        <StyledShadow className="ShadowText__Shadow" blurShadow={blurShadow} anchorShadow={anchorShadow} theme={theme}>
           {children}
         </StyledShadow>
       </StyledShadowText>

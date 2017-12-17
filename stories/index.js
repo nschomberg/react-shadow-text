@@ -57,10 +57,11 @@ stories.add('Simple', () => {
   return (
     <Customizer {...knobs} fontSize={8}>
       <ShadowText
+        anchorShadow={false}
         blurShadow={true}
         theme={{
-          shadowTextXTranslate: '0.5vw',
-          shadowTextYTranslate: '-0.5vw',
+          shadowTextXTranslate: '-0.5vw',
+          shadowTextYTranslate: '0.5vw',
           shadowTextColor: colors.black,
           shadowTextShadowColor: colors.gray,
         }}
@@ -94,6 +95,7 @@ stories.add('Hover Animation', () => {
     render() {
       return (
         <ShadowText
+          anchorShadow={true}
           onMouseEnter={() => this.setState({ isHovering: true })}
           onMouseLeave={() => this.setState({ isHovering: false })}
           onClick={() => this.setState({ isClicking: true })}
@@ -134,6 +136,7 @@ stories.add('Hover Animation 2', () => {
     render() {
       return (
         <ShadowText
+          anchorShadow={true}
           onMouseEnter={() => this.setState({ isHovering: true })}
           onMouseLeave={() => this.setState({ isHovering: false })}
           onClick={() => this.setState({ isClicking: true })}
@@ -157,6 +160,7 @@ stories.add('Customizable', () => {
   return (
     <Customizer {...knobs} fontSize={7}>
       <ShadowText
+        anchorShadow={boolean('Anchor shadow', false)}
         blurShadow={boolean('Blur shadow', true)}
         theme={{
           shadowTextXTranslate: `${number('X Translation (vw)', 0.5)}vw`,

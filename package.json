@@ -1,6 +1,6 @@
 {
   "name": "react-shadow-text",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A customizable react component that renders text with a shadow.",
   "repository": {
     "type": "git",

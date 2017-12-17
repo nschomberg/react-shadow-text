@@ -58,6 +58,36 @@ describe('Shadow Text', () => {
     ).to.be.false;
   });
 
+  it('should anchor shadow', () => {
+    // Given
+    const wrapper = mount(
+      <ShadowText anchorShadow={true}>
+        Test
+      </ShadowText>
+    );
+
+    // Then
+    expect(
+      wrapper.find('.ShadowText')
+        .hasClass('ShadowText--anchoredShadow')
+    ).to.be.true;
+  });
+
+  it('should not anchor shadow', () => {
+    // Given
+    const wrapper = mount(
+      <ShadowText anchorShadow={false}>
+        Test
+      </ShadowText>
+    );
+
+    // Then
+    expect(
+      wrapper.find('.ShadowText')
+        .hasClass('ShadowText--anchoredShadow')
+    ).to.be.false;
+  });
+
   it('should pass props through', () => {
     // Given
     const wrapper = mount(

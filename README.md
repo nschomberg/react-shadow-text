@@ -38,6 +38,7 @@ class Component extends React.Component {
 
 `react-shadow-text` takes the following optional props:
 
+  * __anchorShadow__: Boolean - Whether to anchor the text shadow or not. Defaults to `false`.
   * __blurShadow__: Boolean - Whether to blur the text shadow or not. Defaults to `true`.
   * __className__: String - An optional additional classname to give the component.
   * __theme__: Object - Optional theme overrides for component.
