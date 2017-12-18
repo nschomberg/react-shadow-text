@@ -156,6 +156,34 @@ stories.add('Hover Animation 2', () => {
   );
 });
 
+stories.add('Perspective', () => {
+
+  injectGlobal`
+    .ShadowText--skewed .ShadowText__Shadow {
+      transform: skewX(50deg) scaleY(0.25);
+    }
+  `
+
+  return (
+    <Customizer {...knobs} fontSize={7}>
+      <ShadowText
+        className="ShadowText--skewed"
+        anchorShadow={true}
+        blurShadow={boolean('Blur shadow', false)}
+        theme={{
+          shadowTextXTranslate: `${number('X Translation (vw)', 0.55)}vw`,
+          shadowTextYTranslate: `${number('Y Translation (vw)', -1.4)}vw`,
+          shadowTextColor: color('Text Color', colors.green),
+          shadowTextShadowColor: color('Shadow Color', colors.gray),
+          shadowTextShadowBlur: `${number('Shadow Blur (vw)', 0.2)}vw`,
+        }}
+      >
+        {text('Text', 'Perspective')}
+      </ShadowText>
+    </Customizer>
+  );
+});
+
 stories.add('Customizable', () => {
   return (
     <Customizer {...knobs} fontSize={7}>
